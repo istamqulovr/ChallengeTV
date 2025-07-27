@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f9f9f9;
+    }
+
+
+
+    main {
+        padding: 50px 30px;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 40px;
+        color: #333;
+        font-size: 28px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+
+    th, td {
+        padding: 16px 20px;
+        text-align: left;
+        font-size: 16px;
+    }
+
+    th {
+        background-color: #f0f0f0;
+        color: #333;
+        font-weight: 600;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    tr:hover {
+        background-color: #e8f4ff;
+        transition: background-color 0.3s ease;
+    }
+
+    .td {
+        color: #007bff;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .td:hover {
+        text-decoration: underline;
+    }
+
+
+    }
+</style>
+<main>
+    <h1>List of Workouts</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Days</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for challenge in data %}
+            <tr>
+                <td><a href="{{ challenge.slug }}" class="td">{{ challenge.name }}</a></td>
+                <td>{{ challenge.days }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</main>
+{% endblock %}

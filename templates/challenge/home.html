@@ -1,0 +1,36 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .motivation {
+        margin-bottom: 100px;
+        height: 700px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: url("{% static 'images/Run.webp' %}") center 30% / cover no-repeat;
+        color: white;
+        text-align: center;
+        padding: 40px;
+    }
+
+    .motivation h1 {
+        font-size: 28px;
+        background: rgba(0, 0, 0, 0.65);
+        padding: 30px;
+        border-radius: 15px;
+        max-width: 800px;
+        line-height: 1.6;
+    }
+</style>
+    <div class="motivation">
+        <h1>
+            «Каждый шаг, который ты делаешь на пробежке, — это шаг к лучшей версии себя. <br>
+            Боль временная — гордость вечна. <br>
+            Продолжай двигаться, даже когда хочется сдаться. <br>
+            Потому что именно в такие моменты рождаются чемпионы».
+        </h1>
+    </div>
+
+{% endblock %}

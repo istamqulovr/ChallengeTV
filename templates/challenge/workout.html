@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        main {
+            flex: 1;
+            display: flex;
+            padding: 60px 80px;
+            justify-content: center;
+            align-items: stretch;
+            gap: 40px;
+            min-height: 1200px;
+}
+
+
+        .info-block, .image-block {
+            flex: 1;
+            max-width: 600px;
+            background: #fff;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .info-block h3 {
+            font-size: 26px;
+            margin-bottom: 25px;
+            font-weight: 600;
+            color: #222;
+        }
+
+        .info-block p {
+            margin: 12px 0;
+            font-size: 17px;
+            line-height: 1.6;
+        }
+
+        .info-block strong {
+            color: #007bff;
+        }
+
+        .image-block img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+
+        @media (max-width: 992px) {
+            main {
+                flex-direction: column;
+                padding: 30px 20px;
+            }
+
+            .info-block, .image-block {
+                flex: 1;
+                width: 100%;
+                background: #fff;
+                padding: 40px;
+                border-radius: 16px;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+}
+
+        }
+    </style>
+
+<main>
+
+    <div class="info-block">
+        <h3>Тренировка: Бег + Силовые</h3>
+        <p><strong>{{ challenge.description }}</strong></p>
+        <p>Программа направлена на развитие выносливости, силы и дисциплины. Бег 3 км, 30 отжиманий, растяжка.</p>
+        <p><strong>Первый день:</strong> 14 июля 2025</p>
+        <p><strong>Последний день:</strong> 28 июля 2025</p>
+        <p><strong>Всего дней:</strong> 14</p>
+    </div>
+
+
+    <div class="image-block">
+        <img src="{% static 'images/training.jpg' %}" alt="Фото тренировки">
+    </div>
+</main>
+
+{% endblock %}
