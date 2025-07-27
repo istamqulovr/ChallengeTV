@@ -22,7 +22,7 @@ The project focuses on building habits, discipline, and self-development through
 - 🧠 Framework: Django
 - 🗂️ Database: SQLite
 - 🎨 Frontend: HTML5, CSS3, Bootstrap 4
-- ⚙️ Tools: VS Code, Git, GitHub
+- ⚙️ Tools: PyCharm Professional, Git, GitHub
 
 ---
 
