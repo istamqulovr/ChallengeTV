@@ -48,7 +48,7 @@ bash
 Копировать
 Редактировать
 # Clone the repository
-git clone https://github.com/RuslanIstamqulov/ChallengeTV.git
+git clone https://github.com/istamqulovr/ChallengeTV.git
 cd ChallengeTV
 
 # Create a virtual environment (optional but recommended)
