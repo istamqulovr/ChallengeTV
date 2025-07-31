@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from .forms import RegisterForm
 
 class UserProfile(models.Model):
     GENDER_CHOICES = [
