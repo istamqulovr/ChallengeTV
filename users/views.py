@@ -7,7 +7,9 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.contrib.auth import login as auth_login
-
+from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+from .models import Challenge, UserProfile
 
 
 
@@ -58,3 +60,23 @@ def profile_view(request):
 def logout_view(request):
     logout(request)
     return redirect('profile')
+
+
+
+@login_required
+def join_challenge(request):
+    if request.method == 'POST':
+        import json
+        data = json.loads(request.body)
+        challenge_id = data.get('id')
+
+        try:
+            challenge = Challenge.objects.get(id=challenge_id)
+            profile, created = UserProfile.objects.get_or_create(user=request.user)
+            profile.challenges.add(challenge)
+            return JsonResponse({'success': True})
+        except Challenge.DoesNotExist:
+            return JsonResponse({'success': False, 'error': 'Challenge not found'})
+
+    return JsonResponse({'success': False, 'error': 'Invalid request'})
+

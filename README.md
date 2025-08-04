@@ -1,4 +1,4 @@
- 🏆 ChallengeTV
+w 🏆 ChallengeTV
 
 ChallengeTV is a fully functional web application built with Django that allows users to participate in various challenges, track their progress, and stay motivated toward personal growth and achievements.
 
@@ -33,3 +33,21 @@ The project focuses on building habits, discipline, and self-development through
 `bash
 git clone https://github.com/RuslanIstamqulov/ChallengeTV.git
 cd ChallengeTV
+
+
+
+
+
+
+
+<td>
+                            <select
+                                class="status-select status-{{ challenge.status|slugify }}"
+                                data-id="{{ challenge.id }}">
+                                {% for value, label in challenge.CHANGE_STATUS %}
+                                    <option value="{{ value }}" {% if challenge.status == value %}selected{% endif %}>
+                                        {{ label|upper }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </td>

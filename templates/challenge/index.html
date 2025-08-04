@@ -1,88 +1,196 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
 <style>
     body {
-        margin: 0;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-color: #f9f9f9;
+        background: #1e1e2f;
+        color: #f8f9fa;
     }
 
-
-
-    main {
-        padding: 50px 30px;
-        max-width: 900px;
-        margin: 0 auto;
+    .container {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 20px;
+        padding: 30px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     }
 
-    h1 {
-        text-align: center;
-        margin-bottom: 40px;
-        color: #333;
-        font-size: 28px;
+    h2 {
+        color: #0dcaf0;
     }
 
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        background: #fff;
+    .table {
+        border-collapse: separate;
+        border-spacing: 0 0.5rem;
+    }
+
+    .table thead th {
+        background-color: #2c2f48;
+        color: #ffffff;
+        border: none;
+    }
+
+    .table tbody td {
+        background-color: #2a2d41;
+        border: none;
+        vertical-align: middle;
+    }
+
+    .table tbody tr {
+        border-radius: 12px;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .table-hover tbody tr:hover {
+        transform: scale(1.01);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    .status-select {
+        padding: 8px 14px;
         border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-    }
-
-    th, td {
-        padding: 16px 20px;
-        text-align: left;
-        font-size: 16px;
-    }
-
-    th {
-        background-color: #f0f0f0;
-        color: #333;
         font-weight: 600;
+        border: 2px solid transparent;
+        color: #fff;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.3s ease;
     }
 
-    tr:nth-child(even) {
-        background-color: #f9f9f9;
+    .status-active {
+        background-color: #198754;
+        border-color: #146c43;
     }
 
-    tr:hover {
-        background-color: #e8f4ff;
-        transition: background-color 0.3s ease;
+    .status-done {
+        background-color: #0d6efd;
+        border-color: #0a58ca;
     }
 
-    .td {
-        color: #007bff;
-        text-decoration: none;
+    .status-inprogress {
+        background-color: #fd7e14;
+        border-color: #e35d00;
+    }
+
+    .status-canceled {
+        background-color: #dc3545;
+        border-color: #b02a37;
+    }
+
+    .status-delayed {
+        background-color: #6c757d;
+        border-color: #565e64;
+    }
+
+    .status-select:focus,
+    .status-select:hover {
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+        transform: scale(1.02);
+    }
+
+    a {
+        color: #0dcaf0;
         font-weight: 500;
-    }
-
-    .td:hover {
         text-decoration: none;
     }
 
-
+    a:hover {
+        color: #66f;
+        text-decoration: none;
     }
+    td{
+    color:white;
+    text-decoration:none;
+    }
+
+    .days{
+    color:white;
+    }
+
 </style>
-<main>
-    <h1>List of Workouts</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Days</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for challenge in data %}
-            <tr>
-                <td><a href="{{ challenge.slug }}" class="td">{{ challenge.name }}</a></td>
-                <td>{{ challenge.days }}</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-</main>
+
+<div class="container my-5">
+    <h2 class="text-center mb-4">📋 Список Тренировок</h2>
+
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>days</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for challenge in data %}
+                    <tr>
+                        <td><a href="{{ challenge.slug }}">{{ challenge.name }}</a></td>
+                        <td class="days">{{challenge.days}}</td>
+                        <td>
+    <button class="btn btn-success join-btn" data-id="{{ challenge.id }}">Join</button>
+</td>
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    const csrfToken = '{{ csrf_token }}';
+
+    document.querySelectorAll('.status-select').forEach(select => {
+        select.addEventListener('change', function () {
+            const challengeId = this.dataset.id;
+            const newStatus = this.value;
+
+            fetch(`/update_status/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                },
+                body: JSON.stringify({ id: challengeId, status: newStatus })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    this.className = 'status-select status-' + newStatus;
+                } else {
+                    alert("Ошибка обновления статуса");
+                }
+            });
+        });
+    });
+    const csrfToken = '{{ csrf_token }}';
+
+    document.querySelectorAll('.join-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            const challengeId = this.dataset.id;
+
+            fetch(`/join_challenge/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken,
+                },
+                body: JSON.stringify({ id: challengeId }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    this.innerText = '✓ Присоединился';
+                    this.classList.remove('btn-success');
+                    this.classList.add('btn-secondary');
+                    this.disabled = true;
+                } else {
+                    alert("Ошибка при добавлении в профиль: " + data.error);
+                }
+            });
+        });
+    });
+</script>
 {% endblock %}
