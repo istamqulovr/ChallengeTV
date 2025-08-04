@@ -1,53 +1,96 @@
-w 🏆 ChallengeTV
+w 🏆 ChallengeTVChallengeTV is a fully-featured web application built with Django, designed to help users improve themselves by taking on structured challenges. Whether it's developing good habits, building discipline, or achieving personal goals — ChallengeTV empowers individuals to stay motivated, focused, and consistent in their self-development journey.
 
-ChallengeTV is a fully functional web application built with Django that allows users to participate in various challenges, track their progress, and stay motivated toward personal growth and achievements.
+The application provides an intuitive and user-friendly platform for tracking challenge progress, celebrating achievements, and fostering a community focused on personal growth.
 
-The project focuses on building habits, discipline, and self-development through a structured challenge system.
+🚀 Key Features
+🔐 User Registration and Login – Users can sign up and securely log in to access their personal dashboard.
 
----
+📋 Challenge Browser – Explore a variety of curated challenges across different categories (health, productivity, learning, etc.).
 
-## 🚀 Features
+✅ Join and Track Progress – Users can join challenges and update their progress daily.
 
-- User registration and authentication
-- Browse list of available challenges
-- Join and track progress in challenges
-- Admin panel to manage content
-- (Planned) Achievements, badges, and progress levels
+🧑‍💼 Admin Panel – Admins can add, update, or remove challenges and manage user data.
 
----
+🏅 Planned Features:
 
-## 🛠️ Technologies Used
+Achievement system with badges and milestones
 
-- 👨‍💻 Language: Python 3
-- 🧠 Framework: Django
-- 🗂️ Database: SQLite
-- 🎨 Frontend: HTML5, CSS3, Bootstrap 4
-- ⚙️ Tools: PyCharm Professional, Git, GitHub
+Leveling system to reflect user progress
 
----
+Social features (like profiles, comments, likes)
 
-## ⚙️ Installation & Run Instructions
+Email notifications and motivational streak tracking
 
-1. Clone the repository:
+👥 User Flow
+Register an account or log in to access personalized features.
 
-`bash
-git clone https://github.com/RuslanIstamqulov/ChallengeTV.git
+Browse from a growing list of challenges.
+
+Join a challenge and start tracking your daily or weekly progress.
+
+Stay consistent and build habits over time.
+
+Earn rewards (upcoming feature) and track your self-growth!
+
+🛠️ Technologies Used
+Category	Technology
+🧠 Framework	Django 5
+👨‍💻 Language	Python 3.13
+🗂️ Database	SQLite (easy to migrate to PostgreSQL/MySQL)
+🎨 Frontend	HTML5, CSS3, Bootstrap 4
+⚙️ Tools	PyCharm Professional, Git, GitHub
+
+📦 Installation & Run Instructions
+To get started with the project locally:
+
+bash
+Копировать
+Редактировать
+# Clone the repository
+git clone https://github.com/istamqulovr/ChallengeTV.git
 cd ChallengeTV
 
+# Create a virtual environment (optional but recommended)
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 
+# Install dependencies
+pip install -r requirements.txt
 
+# Apply migrations and start the development server
+python manage.py migrate
+python manage.py runserver
+Visit http://127.0.0.1:8000/ in your browser to access the site.
 
+💡 Project Vision
+ChallengeTV was created with the idea that self-discipline is the gateway to freedom. In a world full of distractions, staying on track with your goals requires consistency, motivation, and clear structure — exactly what this app aims to provide.
 
+Whether you're trying to:
 
+Read more books
 
-<td>
-                            <select
-                                class="status-select status-{{ challenge.status|slugify }}"
-                                data-id="{{ challenge.id }}">
-                                {% for value, label in challenge.CHANGE_STATUS %}
-                                    <option value="{{ value }}" {% if challenge.status == value %}selected{% endif %}>
-                                        {{ label|upper }}
-                                    </option>
-                                {% endfor %}
-                            </select>
-                        </td>
+Eat healthy
+
+Wake up early
+
+Learn new skills
+
+ChallengeTV helps you turn actions into habits and habits into achievements.
+
+📈 Future Plans
+Add social authentication (Google, GitHub, etc.)
+
+Mobile-first responsive redesign
+
+Progress graphs and streak analytics
+
+API integration for mobile clients
+
+Multilingual support (including Russian)
+
+🤝 Contributing
+Want to contribute? Fork the repo, create a feature branch, and submit a pull request. All ideas are welcome to help improve the platform.
+
+📬 Contact
+Feel free to reach out or follow development on GitHub.
+This project is actively maintained and developed by @RuslanIstamqulov.
