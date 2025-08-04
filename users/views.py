@@ -22,6 +22,7 @@ def registration(request):
             user.first_name = form.cleaned_data.get('first_name')
             user.last_name = form.cleaned_data.get('last_name')
             user.email = form.cleaned_data.get('email')
+            user.password1 = form.cleaned_data("password")
             user.save()
 
             gender = form.cleaned_data.get('gender')

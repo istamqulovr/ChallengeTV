@@ -7,6 +7,9 @@ class RegisterForm(UserCreationForm):
     email = forms.EmailField(required=True, label="Email")
     first_name = forms.CharField(required=True, label="Имя")
     last_name = forms.CharField(required=True, label="Фамилия")
+    password1 = forms.CharField(required=True, label="пароль")
+    password2 = forms.CharField(required=True, label="пароль 2")
+
 
 
 
@@ -18,7 +21,7 @@ class RegisterForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
+        fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2' ,'gender']
 
     def clean_gender(self):
         gender = self.cleaned_data.get('gender')
